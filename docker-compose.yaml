@@ -9,3 +9,11 @@ services:
       - 8000:8000
     environment:
       - HTTP_PORT=8000
+
+  web_gh:
+    container_name: wee_web_test_gh
+    image: ghcr.io/wee-ops/wee-web-test:latest
+    ports:
+      - 8001:8001
+    environment:
+      - HTTP_PORT=8001
