@@ -15,7 +15,7 @@ docker pull ghcr.io/wee-ops/wee-web-test:latest
 ## Environment vars
 
 * HTTP_PORT=8080 (default)
-* 
+
 ## Endpoints
 
 ### / : Home
