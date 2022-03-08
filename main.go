@@ -56,7 +56,7 @@ func main() {
 		log.Fatalf("Invalid HTTP_PORT - %v", err)
 	}
 
-	log.Printf("WeeWebTest %s - Listening on %v\n", BuildVersion, httpPort)
+	log.Printf("WeeWebTest \"%s\" - Listening on %v\n", BuildVersion, httpPort)
 	http.HandleFunc("/", handleIndex)
 	http.HandleFunc("/health", handleHealth)
 

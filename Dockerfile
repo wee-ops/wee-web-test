@@ -2,6 +2,7 @@
 FROM golang:1.17-alpine AS builder
 
 ARG BUILD_VERSION
+ENV BUILD_VERSION="${BUILD_VERSION:-production}"
 
 # create appuser.
 RUN adduser -D -g '' elf

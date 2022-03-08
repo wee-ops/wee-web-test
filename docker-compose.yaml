@@ -5,6 +5,8 @@ services:
     container_name: wee_web_test
     build:
       context: .
+      args:
+        BUILD_VERSION: "development"
     ports:
       - 8000:8000
     environment:
