@@ -37,8 +37,11 @@ jobs:
         id: get_version
         run: |
           version=VERSION::${GITHUB_REF/refs\/tags\//}
+          build_time=BUILD_TIME::$(date "+%Y-%m-%d %H:%M:%S")
           echo "::set-output name=${version}"
+          echo "::set-output name=${build_time}"
           echo ${version}
+          echo ${build_time}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -49,6 +52,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             BUILD_VERSION=${{ steps.get_version.outputs.VERSION }}
+            BUILD_TIME=${{ steps.get_version.outputs.BUILD_TIME }}
 
 # jobs:
 #   build:

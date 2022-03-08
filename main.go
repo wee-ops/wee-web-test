@@ -13,6 +13,7 @@ import (
 var (
 	startTime    time.Time
 	BuildVersion = "development"
+	BuildTime    = "2000-01-01 00:00:00"
 )
 
 func getEnv(env string, defaultValue string) (envValue string) {
@@ -33,6 +34,7 @@ func handleHealth(w http.ResponseWriter, req *http.Request) {
 	envs["RunningBy"] = time.Since(startTime).String()
 	envs["HOST_NAME"] = getEnv("HOSTNAME", "localhost")
 	envs["BuildVersion"] = BuildVersion
+	envs["BuildTime"] = BuildTime
 	w.Header().Add("Content-type", "application/json")
 
 	body, _ := json.Marshal(envs)
@@ -56,7 +58,7 @@ func main() {
 		log.Fatalf("Invalid HTTP_PORT - %v", err)
 	}
 
-	log.Printf("WeeWebTest \"%s\" - Listening on %v\n", BuildVersion, httpPort)
+	log.Printf("WeeWebTest \"%s\" \"%s\" - Listening on %v\n", BuildVersion, BuildTime, httpPort)
 	http.HandleFunc("/", handleIndex)
 	http.HandleFunc("/health", handleHealth)
 
