@@ -25,14 +25,14 @@ func getEnv(env string, defaultValue string) (envValue string) {
 }
 
 func handleIndex(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprint(w, "<h1>Wee Web Test</h1><a href=\"../health\">Health</a>")
+	fmt.Fprintf(w, "<h1>Wee Web Test</h1><h2>Version %s</h2><h3>Built @ %s</h3><a href=\"../info\">info</a>", BuildVersion, BuildTime)
 }
 
-func handleHealth(w http.ResponseWriter, req *http.Request) {
+func handleInfo(w http.ResponseWriter, req *http.Request) {
 	envs := make(map[string]string)
 	envs["StartTime"] = startTime.String()
 	envs["RunningBy"] = time.Since(startTime).String()
-	envs["HOST_NAME"] = getEnv("HOSTNAME", "localhost")
+	envs["HostName"] = getEnv("HOSTNAME", "localhost")
 	envs["BuildVersion"] = BuildVersion
 	envs["BuildTime"] = BuildTime
 	w.Header().Add("Content-type", "application/json")
@@ -60,7 +60,7 @@ func main() {
 
 	log.Printf("WeeWebTest \"%s\" \"%s\" - Listening on %v\n", BuildVersion, BuildTime, httpPort)
 	http.HandleFunc("/", handleIndex)
-	http.HandleFunc("/health", handleHealth)
+	http.HandleFunc("/info", handleInfo)
 
 	err = http.ListenAndServe(fmt.Sprintf(":%d", httpPort), logRequest(http.DefaultServeMux))
 	if err != nil {
