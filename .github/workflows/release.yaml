@@ -5,14 +5,6 @@ on:
     tags:
       - "v*"
 
-env:
-  USERS_IMAGE_NAME: "cinema-users"
-  MOVIES_IMAGE_NAME: "cinema-movies"
-  SHOWTIMES_IMAGE_NAME: "cinema-showtimes"
-  BOOKINGS_IMAGE_NAME: "cinema-bookings"
-  WEBSITE_IMAGE_NAME: "cinema-website"
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
