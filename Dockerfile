@@ -18,7 +18,7 @@ RUN go mod download && \
 # copy the source code as the last step
 COPY . .
 # build binary
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s -X main.BuildVersion=${BUILD_VERSION} -X main.BuildTime=${BUILD_TIME}" -a -installsuffix cgo -o /go/bin/wee_web_test .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s -X main.BuildVersion=${BUILD_VERSION} -X main.BuildTime='${BUILD_TIME}'" -a -installsuffix cgo -o /go/bin/wee_web_test .
 
 
 # build a small image
